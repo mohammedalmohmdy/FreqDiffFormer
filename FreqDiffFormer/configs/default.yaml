@@ -1,0 +1,18 @@
+experiment:
+  name: freqdiffformer_demo
+  seed: 42
+training:
+  epochs: 2
+  batch_size: 2
+  lr: 0.0001
+  lambda_ddpm: 0.1
+model:
+  spatial_backbone: swin_tiny
+  freq_embedding_dim: 256
+  latent_dim: 256
+  ddpm_timesteps: 10
+data:
+  dataset: sketchy_mini
+  root: ./data
+logging:
+  output_dir: ./outputs

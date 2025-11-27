@@ -1,0 +1,7 @@
+image_path,sketch_path,label
+images/img_000.jpg,sketches/sk_000.png,0
+images/img_001.jpg,sketches/sk_001.png,1
+images/img_002.jpg,sketches/sk_002.png,2
+images/img_003.jpg,sketches/sk_003.png,3
+images/img_004.jpg,sketches/sk_004.png,0
+images/img_005.jpg,sketches/sk_005.png,1
