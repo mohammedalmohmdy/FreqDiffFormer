@@ -55,4 +55,17 @@ python scripts/eval.py --checkpoint outputs/checkpoint_best.pth --dataset sketch
 
 
 
+Datasets
+ShoeV2 / ChairV2
+Sketchy Official Website
+Google Drive Download
+
+Sketchy
+Sketchy Official Website
+Google Drive Download
+
+TU-Berlin
+TU-Berlin Official Website
+Google Drive Download
+
 
