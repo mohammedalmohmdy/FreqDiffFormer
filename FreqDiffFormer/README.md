@@ -89,7 +89,7 @@ title = {FREQDIFFFORMER: FREQUENCY-GUIDED TRANSFORMER–DIFFUSION FRAMEWORK FOR 
 
 author = {Mohammed A. S. Al-Mohamadi and Prabhakar C. J.},
 
-journal = {pattern analysis and applications}, year = {2025} }
+journal = {expert systems with applications}, year = {2025} }
 
 License: This project is released under the MIT License.
 
