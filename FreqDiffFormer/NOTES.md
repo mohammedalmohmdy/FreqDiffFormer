@@ -16,4 +16,4 @@ This file documents important developer notes, reproduction tips, and items revi
 - [ ] Train on at least one dataset and verify output shapes.
 
 ## Contact
-If reviewers face issues, provide this repository link and contact: <your-email@example.com>
+If reviewers face issues, provide this repository link and contact: almohmdy30@gmail.com
