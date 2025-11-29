@@ -3,10 +3,6 @@
 This repository contains a reproducible implementation skeleton of **FreqDiffFormer**:
 a hybrid frequency–transformer–diffusion architecture for Fine-Grained Sketch-Based Image Retrieval (FG-SBIR).
 
-**Note:** This is a full and realistic codebase skeleton (models, training, evaluation, config, and utilities).
-You must provide datasets, pretrained weights (optional), and tune hyperparameters for state-of-the-art results.
-
-**Paper:** FreqDiffFormer (see accompanying manuscript). fileciteturn1file0
 
 ---
 
@@ -57,19 +53,6 @@ python scripts/train.py --config configs/default.yaml
 python scripts/eval.py --checkpoint outputs/checkpoint_best.pth --dataset sketchy
 ```
 
----
 
-## License
-MIT — see LICENSE file.
 
----
 
-If you want, I can also push this repository to a **new GitHub repository** for you (I will provide the commands and a git script).
-
-## Notes & Reproduction Checklist
-
-See `NOTES.md` for detailed developer notes and reproduction tips.
-
-## Cover Letter & Suggested Reviewers
-- `COVER_LETTER_ESWA.md`
-- `SUGGESTED_REVIEWERS.md`
