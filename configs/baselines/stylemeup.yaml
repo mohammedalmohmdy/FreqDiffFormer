@@ -1,0 +1,15 @@
+# Baseline: StyleMeUp.
+baseline:
+  name: StyleMeUp
+  short_id: stylemeup
+  table: "Table 2"
+  category: style_transfer
+  reference: "StyleMeUp: style-aware sketch-to-photo retrieval."
+  implemented: false
+  placeholder: true
+  missing_info:
+    - "Style-transfer conditioning block not provided."
+  training:
+    lr: 1.0e-4
+    batch_size: 32
+    epochs: 50

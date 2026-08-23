@@ -1,0 +1,6 @@
+# Ablation: remove triplet loss (L_triplet = 0).
+experiment:
+  name: ablation_no_triplet
+training:
+  ablation:
+    use_triplet: false

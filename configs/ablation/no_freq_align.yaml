@@ -1,0 +1,6 @@
+# Ablation: remove frequency alignment loss (lambda2 L_freq_align = 0).
+experiment:
+  name: ablation_no_freq_align
+training:
+  ablation:
+    use_freq_align: false

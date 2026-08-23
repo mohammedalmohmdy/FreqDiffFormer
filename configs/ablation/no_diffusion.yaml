@@ -1,0 +1,6 @@
+# Ablation: remove diffusion module (entire diffusion regularizer off).
+experiment:
+  name: ablation_no_diffusion
+training:
+  ablation:
+    use_diffusion: false

@@ -1,0 +1,18 @@
+# Baseline: DiffSketch (diffusion-based sketch retrieval).
+# Used as the paired baseline against FreqDiffFormer for per-class Wilcoxon analysis.
+baseline:
+  name: DiffSketch
+  short_id: diffsketch
+  table: "Table 2 / Supplementary Table S1"
+  category: diffusion
+  reference: "DiffSketch: diffusion for sketch-based image retrieval."
+  implemented: false
+  placeholder: true
+  missing_info:
+    - "Exact diffusion U-Net config and conditioning not provided."
+    - "DiffSketch per-class results are NOT in this repo; Supplementary Table S1
+      is only filled once real DiffSketch per-class evaluation CSVs are provided."
+  training:
+    lr: 1.0e-4
+    batch_size: 32
+    epochs: 50

@@ -1,0 +1,15 @@
+# Baseline: DSSA (Domain-aware Sketch-aware Search-Attention).
+baseline:
+  name: DSSA
+  short_id: dssa
+  table: "Table 2"
+  category: attention
+  reference: "DSSA: domain-aware deep search-attention sketch-based image retrieval."
+  implemented: false
+  placeholder: true
+  missing_info:
+    - "Detailed DSSA module topology not provided in this repository."
+  training:
+    lr: 1.0e-4
+    batch_size: 32
+    epochs: 50

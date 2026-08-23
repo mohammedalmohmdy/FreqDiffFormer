@@ -1,0 +1,15 @@
+# Baseline: SketchyGAN.
+baseline:
+  name: SketchyGAN
+  short_id: sketchygan
+  table: "Table 2"
+  category: gan
+  reference: "SketchyGAN: a sketch-based image retrieval GAN."
+  implemented: false
+  placeholder: true
+  missing_info:
+    - "GAN discriminator and generator details not provided."
+  training:
+    lr: 1.0e-4
+    batch_size: 32
+    epochs: 50

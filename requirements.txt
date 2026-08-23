@@ -1,0 +1,13 @@
+torch>=1.12
+torchvision
+timm>=0.9
+numpy
+scipy
+PyYAML
+opencv-python
+scikit-learn
+scikit-image
+tqdm
+matplotlib
+einops
+pytest

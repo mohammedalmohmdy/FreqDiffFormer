@@ -1,0 +1,15 @@
+# Baseline: DSH (Deep Sketch-Image Hashing).
+baseline:
+  name: DSH
+  short_id: dsh
+  table: "Table 2"
+  category: hashing
+  reference: "Deep Sketch-Image Hashing (DSH) for retrieval."
+  implemented: false
+  placeholder: true
+  missing_info:
+    - "Hash code length and quantization loss details not provided."
+  training:
+    lr: 1.0e-4
+    batch_size: 32
+    epochs: 50

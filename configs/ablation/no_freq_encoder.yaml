@@ -1,0 +1,10 @@
+# Ablation: remove frequency encoder.
+# Overlays configs/default.yaml. Removes ONLY the frequency encoder; everything else unchanged.
+# Implemented semantics: the real DCT frequency encoder is bypassed (use_freq_encoder=false),
+# and a learnable frequency-token placeholder (no frequency content) is fed to the
+# Cross-Domain Transformer so the rest of the architecture stays structurally intact.
+experiment:
+  name: ablation_no_freq_encoder
+training:
+  ablation:
+    use_freq_encoder: false

@@ -1,0 +1,8 @@
+# Ablation: remove reconstruction loss (lambda1 L_diffusion = 0).
+# Distinct from "no_diffusion": here the diffusion module is still built but its
+# reconstruction loss contributes zero gradient.
+experiment:
+  name: ablation_no_recon
+training:
+  ablation:
+    use_recon: false

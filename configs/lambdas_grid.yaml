@@ -1,0 +1,23 @@
+# lambda1/lambda2 validation grid-search configuration.
+# Selected on the Sketchy VALIDATION split ONLY (never the test set).
+# Grids exactly as in the manuscript:
+#   lambda1 (diffusion reconstruction) in {0.1, 0.5, 1.0}
+#   lambda2 (frequency alignment)     in {0.01, 0.1, 0.5}
+# The script writes a CSV of all (lambda1, lambda2, val_mAP@200, val_top1).
+# It does NOT hard-code the selected values; defaults in default.yaml (0.5/0.1) are canonical.
+lambda_search:
+  dataset: sketchy
+  use_split: val
+  primary_metric: map_at_200
+  runs_per_setting: 1
+  grid:
+    lambda1: [0.1, 0.5, 1.0]
+    lambda2: [0.01, 0.1, 0.5]
+  # training budget per grid cell (shortened so the sweep is tractable; full 50-epoch
+  # runs are used for the final selected values during the real experiment).
+  training_override:
+    epochs: 5
+    batch_size: 32
+  baseline_selection:              # canonical, fixed, not learned
+    lambda1: 0.5
+    lambda2: 0.1

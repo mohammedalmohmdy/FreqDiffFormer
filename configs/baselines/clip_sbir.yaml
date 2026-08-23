@@ -1,0 +1,15 @@
+# Baseline: CLIP-SBIR (CLIP features fine-tuned for sketch-based retrieval).
+baseline:
+  name: CLIP-SBIR
+  short_id: clip_sbir
+  table: "Table 2"
+  category: foundation
+  reference: "CLIP-based fine-tuning for sketch-based image retrieval."
+  implemented: false
+  placeholder: true
+  missing_info:
+    - "CLIP variant and fine-tuning head details not provided; requires CLIP weights."
+  training:
+    lr: 1.0e-4
+    batch_size: 32
+    epochs: 50

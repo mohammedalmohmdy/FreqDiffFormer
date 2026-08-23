@@ -1,0 +1,21 @@
+# Baseline: Siamese CNN (Sangkloy et al., 2016).
+# Architecture reference: dual-branch CNN (sketch + photo) trained with contrastive/triplet loss.
+# Status: PLACEHOLDER. This config represents Table 2 row Siamese CNN.
+# Not a verified reproduction — see baselines/siamese_cnn.py and MISSING_INFO.
+baseline:
+  name: Siamese CNN
+  short_id: siamese_cnn
+  table: "Table 2"
+  category: cnn
+  reference: "Sangkloy et al., Sketchy: a database that enables sketches based image retrieval, CVPR 2016."
+  implemented: false      # set true only once non-placeholder code exists
+  placeholder: true
+  missing_info:
+    - "Exact backbone depth/width and pretraining not specified in this repository."
+  training:
+    backbone: resnet50_placeholder
+    objective: triplet
+    margin: 0.2
+    lr: 1.0e-4
+    batch_size: 32
+    epochs: 50

@@ -1,0 +1,8 @@
+# Ablation: remove Cross-Domain Transformer.
+# Implemented semantics: cross-domain cross-attention is bypassed (use_cdt=false);
+# freq and spatial tokens are pooled independently and projected to the latent.
+experiment:
+  name: ablation_no_cdt
+training:
+  ablation:
+    use_cdt: false

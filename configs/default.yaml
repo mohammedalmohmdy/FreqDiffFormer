@@ -1,0 +1,173 @@
+# =============================================================================
+# FreqDiffFormer — manuscript-consistent configuration
+# Target manuscript:
+#   "FreqDiffFormer: Frequency-Guided Transformer-Diffusion Framework for
+#    Fine-Grained Sketch-Based Image Retrieval"
+# Every manuscript-specified value lives here. Do not silently change these.
+# =============================================================================
+
+experiment:
+  name: freqdiffformer
+  seed: 42
+  deterministic: true        # cudnn.deterministic + use_deterministic_algorithms
+  record_metadata: true      # write seed/config/operator to run metadata
+
+model:
+  input_size: 224            # input resolution 224x224 (manuscript)
+
+  # --- Frequency encoder (FEM) ---
+  freq:
+    in_channels: 2          # two-channel DCT frequency representation (low + high)
+    token_dim: 256          # frequency token dimension
+    num_tokens: 196          # 196 frequency tokens
+    token_grid: 14           # adaptive pooling to 14x14 -> 196 tokens
+    conv_channels: [64, 128, 256, 256]   # four conv blocks: 2->64->128->256->256
+    kernel_size: 3
+    strides: [2, 2, 2, 1]    # first three stride2, fourth stride1
+    paddings: [1, 1, 1, 1]   # all padding 1
+    norm: instance           # InstanceNorm
+    activation: relu
+    use_sign_log: true       # sign-logarithmic compression
+    use_robust_minmax: true  # robust min-max scaling (median/MAD-based)
+    low_freq_mask_ratio: 0.25   # low-frequency mask radius as fraction of side
+    high_freq_mask_ratio: 0.25  # high-frequency mask radius as fraction of side
+    positional_embedding: learnable
+    layer_norm: true
+
+  # --- Spatial backbone ---
+  spatial:
+    backbone: swin_tiny_patch4_window7_224   # Swin Transformer-Tiny
+    pretrained: true
+    token_dim: 256          # projected to match frequency tokens
+    fail_on_missing: true  # never silently substitute a lightweight backbone
+
+  # --- Cross-Domain Transformer ---
+  cdt:
+    token_dim: 256
+    num_heads: 8
+    num_layers: 2
+    bidirectional: true     # genuine cross-attention both directions
+    ffn_ratio: 4.0
+
+  latent_dim: 512          # latent dimension (manuscript)
+
+diffusion:
+  timesteps: 100           # T = 100
+  beta_start: 1.0e-4       # beta_min
+  beta_end: 2.0e-2         # beta_max
+  schedule: linear         # linear beta schedule
+  sample_t_uniform: true   # timesteps sampled uniformly during training
+  denoiser: conditional_latent_unet
+  objective: noise_mse     # MSE between injected and predicted noise
+  training_time_regularizer: true   # diffusion is a TRAINING-TIME regularizer
+  inference_reverse_sampling: false # NO iterative reverse diffusion at retrieval
+  unet:
+    base_dim: 64           # channels at the top level of the latent U-Net
+    latent_grid: 8          # latent_dim(512) tokenized to grid of 8 tokens
+    num_heads: 4
+    cond_dim: 256          # conditioning token dim (cross-domain fused tokens)
+    self_attn: true        # required self-attention
+    cross_attn: true       # required cross-attention
+
+training:
+  epochs: 50               # 50 epochs
+  batch_size: 32          # batch size 32
+  lr: 1.0e-4              # 1e-4
+  optimizer: adamw
+  weight_decay: 0.01      # standard AdamW default (not specified by manuscript)
+  margin: 0.2            # triplet loss margin
+
+  # loss weights (fixed, not learnable)
+  lambda1_diffusion: 0.5   # lambda1 = 0.5 for diffusion reconstruction loss
+  lambda2_freq_align: 0.1  # lambda2 = 0.1 for frequency alignment loss
+
+  # ablation switches (each removes ONLY the specified component)
+  ablation:
+    use_freq_encoder: true
+    use_freq_align: true
+    use_cdt: true
+    use_diffusion: true
+    use_triplet: true
+    use_recon: true
+
+data:
+  dataset: sketchy          # sketchy | shoev2 | chairv2 | tu_berlin
+  root: ./data
+  image_size: 224
+  num_workers: 4
+
+  datasets:
+    sketchy:
+      root: ./data/sketchy
+      train_split: splits/train.csv
+      val_split: splits/val.csv
+      test_split: splits/test.csv
+      gallery_split: splits/gallery.csv
+      query_split: splits/query.csv
+      photo_subdir: photos
+      sketch_subdir: sketches
+      num_classes: 25
+      gallery_size: 500
+    shoev2:
+      root: ./data/ShoeV2
+      train_split: splits/train.csv
+      val_split: splits/val.csv
+      test_split: splits/test.csv
+      gallery_split: splits/gallery.csv
+      query_split: splits/query.csv
+      photo_subdir: photo
+      sketch_subdir: sketch
+      num_classes: 20
+      gallery_size: 400
+    chairv2:
+      root: ./data/ChairV2
+      train_split: splits/train.csv
+      val_split: splits/val.csv
+      test_split: splits/test.csv
+      gallery_split: splits/gallery.csv
+      query_split: splits/query.csv
+      photo_subdir: photo
+      sketch_subdir: sketch
+      num_classes: 15
+      gallery_size: 250
+    tu_berlin:
+      root: ./data/tu_berlin
+      train_split: splits/train.csv
+      val_split: splits/val.csv
+      test_split: splits/test.csv
+      gallery_split: splits/gallery.csv
+      query_split: splits/query.csv
+      photo_subdir: photo
+      sketch_subdir: sketch
+      num_classes: 50
+      gallery_size: 400
+
+eval:
+  primary_metric: map_at_200
+  secondary_metric: top1
+  top_k: 200
+  cache_gallery: true
+  gallery_cache_dir: ./outputs/gallery_cache
+  use_test_split: true     # benchmark evaluation uses the TEST split
+
+stats:
+  test: wilcoxon_signed_rank
+  alpha: 0.01             # two-sided alpha = 0.01
+  per_dataset_observations:
+    sketchy: 25
+    shoev2: 20
+    chairv2: 15
+    tu_berlin: 50
+  effect_size: rank_biserial
+  confidence_interval: 95  # 95% CI
+
+timing:
+  hardware: RTX_A6000
+  batch_size: 1
+  warmup_iterations: 50
+  measured_iterations: 300
+  cuda_sync: true
+
+logging:
+  output_dir: ./outputs
+  log_interval: 20
