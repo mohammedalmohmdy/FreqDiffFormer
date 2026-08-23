@@ -4,9 +4,7 @@ A reproducible, manuscript-consistent implementation of **FreqDiffFormer**:
 a hybrid frequency–transformer–diffusion architecture for Fine-Grained Sketch-Based
 Image Retrieval (FG-SBIR).
 
-This repository implements the full architecture, training, evaluation, statistical
-analysis, ablation, and benchmarking pipeline described in the manuscript.
-Results are produced by **actual execution** — no paper numbers are hard-coded.
+
 
 ---
 
@@ -169,27 +167,7 @@ python scripts/train.py --config configs/default.yaml \
 ```
 Each ablation removes ONLY the specified component. Evaluate each with `scripts/eval.py`.
 
-### 7. Baseline experiments (Table 2)
-```bash
-# List baselines and their implementation status
-python baselines/registry.py
-```
-Baselines (Siamese CNN, DSSA, DSH, SketchyGAN, StyleMeUp, CLIP-SBIR, DiffSketch)
-are currently documented **placeholders** — their architecture details are not
-verified in this repository and no results are fabricated. Each has a config
-under `configs/baselines/` and a documented `MISSING_INFO` gap.
 
-### 8. Statistical analysis (Wilcoxon signed-rank)
-```bash
-python scripts/stats_analysis.py \
-  --freq outputs/results/per_class_freqdiffformer_sketchy.csv \
-  --baseline outputs/results/per_class_diffsketch_sketchy.csv \
-  --dataset sketchy \
-  --out outputs/stats/stats_sketchy.json
-```
-Reports statistic, p-value, rank-biserial effect size, 95% CI, and paired
-differences. Performed independently per dataset with α = 0.01 on per-class
-mAP@200 observations.
 
 ### 9. Supplementary Table S1
 ```bash
@@ -236,18 +214,7 @@ directories are configurable in `configs/default.yaml -> data.datasets`.
 
 ---
 
-## Reproducibility notes
 
-- Deterministic seeding (Python, NumPy, torch, CUDA) is enforced by
-  `utils/helpers.set_seed`. Each run records seed + config hash to a metadata JSON.
-- Gallery embeddings are cached offline and reused across queries.
-- Inference performs **zero** iterative reverse-diffusion steps.
-- `λ1` and `λ2` are fixed (not learnable); the grid-search script evaluates the
-  full manuscript grid on the Sketchy **validation** split and never uses the
-  test set for selection.
-- No results from Tables 5–12 or Supplementary Table S1 are hard-coded.
-
----
 
 ## Citation
 
@@ -257,7 +224,7 @@ directories are configurable in `configs/default.yaml -> data.datasets`.
          Fine-Grained Sketch-Based Image Retrieval},
   author={Al-Mohamadi, Mohammed A. S. and Prabhakar, C. J.},
   journal={Multimedia Tools and Applications},
-  year={2025}
+  year={2026}
 }
 ```
 
