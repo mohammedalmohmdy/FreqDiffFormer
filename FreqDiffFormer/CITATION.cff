@@ -1,9 +1,0 @@
-cff-version: 1.2.0
-message: "If you use this code, please cite the paper."
-authors:
-  - family-names: Al-Mohamadi
-    given-names: Mohammed
-title: "FreqDiffFormer: Frequency-Guided Transformer–Diffusion Framework for FG-SBIR"
-version: "1.0"
-doi: "TBD"
-date-released: "2025-11-27"
