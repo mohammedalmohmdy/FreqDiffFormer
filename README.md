@@ -6,6 +6,24 @@ Image Retrieval (FG-SBIR).
 
 
 
+---
+
+## Proposed Framework
+
+The overall architecture of FreqDiffFormer, a frequency-guided Transformer–Diffusion framework for fine-grained sketch-based image retrieval, is illustrated below.
+
+<p align="center">
+  <img src="FreqDiffFormer.png"
+       alt="Overall architecture of FreqDiffFormer"
+       width="900">
+</p>
+
+<p align="center">
+  <em>Figure 1. Overall architecture of the proposed FreqDiffFormer framework.</em>
+</p>
+
+---
+
 
 ---
 
