@@ -4,7 +4,7 @@ A reproducible, manuscript-consistent implementation of **FreqDiffFormer**:
 a hybrid frequency–transformer–diffusion architecture for Fine-Grained Sketch-Based
 Image Retrieval (FG-SBIR).
 
-![Uploading image.png…]()
+
 
 
 ---
